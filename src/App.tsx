@@ -1,11 +1,8 @@
-import { useState } from "react";
-import { SquareMatrix } from "~/utils/squareMatrix";
 import { SudokuField } from "~/components/SudokuField";
+import { useNewBoard } from "./utils/hooks/useNewBoard";
 
 function App() {
-  const [matrix, setMatrix] = useState(
-    () => new SquareMatrix<number | null>(9, () => null)
-  );
+  const { matrix, setXy } = useNewBoard();
 
   return (
     <div className="flex items-center justify-center h-full bg-yellow-50">
@@ -19,7 +16,7 @@ function App() {
                   x={x}
                   y={y}
                   value={matrix.xy(x, y)}
-                  onChange={(value) => setMatrix(matrix.setXy(x, y, value))}
+                  onChange={(value) => setXy(x, y, value)}
                 />
               ))}
             </tr>

@@ -50,4 +50,14 @@ export class SquareMatrix<T> {
   private copy(): SquareMatrix<T> {
     return new SquareMatrix(this.size, (x, y) => this.xy(x, y));
   }
+
+  merge(other: SquareMatrix<T>): SquareMatrix<T> {
+    if (this.size !== other.size) {
+      throw new Error("Cannot merge matrices of different sizes");
+    }
+
+    return new SquareMatrix(this.size, (x, y) => {
+      return other.xy(x, y) ?? this.xy(x, y);
+    });
+  }
 }
