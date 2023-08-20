@@ -11,7 +11,7 @@ export function parse(input: string): SquareMatrix<number | null> {
     const value = parseInt(rows[y]?.[x], 10);
 
     if (isNaN(value)) {
-      throw new Error(`Invalid input value at (${x}, ${y}): ${rows[y][x]}`);
+      throw new Error(`Invalid input value at (${x}, ${y}): ${rows[y]?.[x]}`);
     }
 
     // 0 will be returned as null.
