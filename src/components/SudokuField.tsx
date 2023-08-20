@@ -19,7 +19,9 @@ export function SudokuField(props: Props) {
   ].join(" ");
 
   return (
-    <td className={`border-black ${borderStyle} bg-yellow-200`}>
+    <td
+      className={`border-black ${borderStyle} bg-yellow-200 focus-within:bg-green-300`}
+    >
       <input
         type="text"
         maxLength={1}

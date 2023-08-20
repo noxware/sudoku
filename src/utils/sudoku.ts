@@ -1,3 +1,4 @@
+import { areUnique } from "./array";
 import { SquareMatrix } from "./squareMatrix";
 
 export function parse(input: string): SquareMatrix<number | null> {
@@ -18,4 +19,15 @@ export function parse(input: string): SquareMatrix<number | null> {
   });
 
   return matrix;
+}
+
+export function isSolved(matrix: SquareMatrix<number | null>): boolean {
+  return (
+    matrix.rows().every((row) => areUnique(row)) &&
+    matrix.columns().every((column) => areUnique(column)) &&
+    matrix
+      .partition(3)
+      .flatten()
+      .every((block) => areUnique(block.flatten()))
+  );
 }

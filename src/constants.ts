@@ -1,3 +1,4 @@
+// Problem 84 of the book.
 export const defaultSudoku = `
 000 000 004
 100 020 003
@@ -5,7 +6,7 @@ export const defaultSudoku = `
 
 000 000 460
 400 000 205
-007 007 000
+007 004 000
 
 301 092 040
 000 080 501

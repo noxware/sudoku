@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { parse } from "~/utils/sudoku";
+import { parse, isSolved } from "~/utils/sudoku";
 import { defaultSudoku } from "~/constants";
 
 export function useNewBoard() {
@@ -11,5 +11,5 @@ export function useNewBoard() {
     setMatrix(newMatrix);
   }
 
-  return { matrix, setXy };
+  return { matrix, setXy, isSolved: isSolved(matrix) };
 }

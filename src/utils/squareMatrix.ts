@@ -47,6 +47,18 @@ export class SquareMatrix<T> {
     return rows;
   }
 
+  columns(): T[][] {
+    const columns: T[][] = [];
+    for (let x = 0; x < this.size; x++) {
+      const column: T[] = [];
+      for (let y = 0; y < this.size; y++) {
+        column.push(this.xy(x, y));
+      }
+      columns.push(column);
+    }
+    return columns;
+  }
+
   private copy(): SquareMatrix<T> {
     return new SquareMatrix(this.size, (x, y) => this.xy(x, y));
   }
@@ -59,5 +71,26 @@ export class SquareMatrix<T> {
     return new SquareMatrix(this.size, (x, y) => {
       return other.xy(x, y) ?? this.xy(x, y);
     });
+  }
+
+  partition(partitionSize: number): SquareMatrix<SquareMatrix<T>> {
+    if (this.size % partitionSize !== 0) {
+      throw new Error(
+        `Cannot partition matrix of size ${this.size} into squares of size ${partitionSize}`
+      );
+    }
+
+    const partitions = new SquareMatrix(this.size / partitionSize, (p, q) => {
+      const partition = new SquareMatrix(partitionSize, (x, y) => {
+        return this.xy(p * partitionSize + x, q * partitionSize + y);
+      });
+      return partition;
+    });
+
+    return partitions;
+  }
+
+  flatten(): T[] {
+    return this.rows().flat();
   }
 }
