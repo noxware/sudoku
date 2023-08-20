@@ -11,5 +11,9 @@ export function useNewBoard() {
     setMatrix(newMatrix);
   }
 
-  return { matrix, setXy, isSolved: isSolved(matrix) };
+  function wasPrefilled(x: number, y: number): boolean {
+    return originalMatrix.xy(x, y) !== null;
+  }
+
+  return { matrix, setXy, isSolved: isSolved(matrix), wasPrefilled };
 }

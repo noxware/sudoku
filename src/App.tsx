@@ -2,7 +2,19 @@ import { SudokuField } from "~/components/SudokuField";
 import { useNewBoard } from "./utils/hooks/useNewBoard";
 
 function App() {
-  const { matrix, setXy, isSolved } = useNewBoard();
+  const { matrix, setXy, isSolved, wasPrefilled } = useNewBoard();
+
+  const focusNext = (x: number, y: number) => {
+    let nextCoords = matrix.nextCyclicCoordinates(x, y);
+    while (wasPrefilled(nextCoords.x, nextCoords.y)) {
+      nextCoords = matrix.nextCyclicCoordinates(nextCoords.x, nextCoords.y);
+    }
+    document
+      .querySelector<HTMLElement>(
+        `input[data-x="${nextCoords.x}"][data-y="${nextCoords.y}"]`
+      )
+      ?.focus();
+  };
 
   return (
     <div className="flex flex-col h-full p-4 bg-yellow-50">
@@ -19,6 +31,7 @@ function App() {
                     value={matrix.xy(x, y)}
                     onChange={(value) => {
                       setXy(x, y, value);
+                      focusNext(x, y);
                     }}
                   />
                 ))}

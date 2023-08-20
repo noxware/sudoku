@@ -93,4 +93,16 @@ export class SquareMatrix<T> {
   flatten(): T[] {
     return this.rows().flat();
   }
+
+  nextCyclicCoordinates(x: number, y: number): { x: number; y: number } {
+    if (x === this.size - 1 && y === this.size - 1) {
+      return { x: 0, y: 0 };
+    }
+
+    if (x === this.size - 1) {
+      return { x: 0, y: y + 1 };
+    }
+
+    return { x: x + 1, y };
+  }
 }

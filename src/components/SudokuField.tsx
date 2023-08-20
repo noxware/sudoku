@@ -27,6 +27,8 @@ export function SudokuField(props: Props) {
         maxLength={1}
         className="w-16 p-2 text-center bg-transparent outline-none aspect-square"
         value={props.value ?? ""}
+        data-x={props.x}
+        data-y={props.y}
         onChange={(e) => {
           const value = e.target.value;
           if (value === "") {
